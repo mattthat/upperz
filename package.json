@@ -20,7 +20,7 @@
   ],
   "scripts": {
     "clean": "rimraf upperz-frontend upperz-backend && npm-run-all -s clean:docker-image",
-    "build": "npm-run-all -s get:frontend get:backend build:backend build:docker-image",
+    "build": "npm-run-all -s get:frontend get:backend build:backend build:frontend inject:frontend build:docker-image",
     "build:docker-image": "docker build . -t tadalabs/upperz:latest",
     "docker-compose:up": "docker-compose up",
     "docker-compose:down": "docker-compose down",
@@ -28,9 +28,8 @@
     "get:frontend": "git clone https://github.com/tadalabs/upperz-frontend.git",
     "get:backend": "git clone https://github.com/tadalabs/upperz-backend.git",
     "build:backend": "cd upperz-backend && npm install && npm run build:api",
-    "start:backend": "cd /usr/local/app/backend/release && node api-server.js",
-    "start:frontend": "cd /usr/local/app/frontend && npm run start",
-    "start:app": "npm-run-all --parallel start:backend start:frontend"
+    "build:frontend": "cd upperz-frontend && npm install && npm run build",
+    "inject:frontend": "cd upperz-frontend/build && find . -depth -print | cpio -pdmv ../../upperz-backend/release/upperz"
   },
   "devDependencies": {
     "rimraf": "^2.6.3",

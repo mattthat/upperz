@@ -12,17 +12,8 @@ $ npm run docker-compose:up
 
 ```
 
-### testing
-
-```
-$ curl -s http://localhost:8080/ | jq
-  {
-    "status": "OK"
-  }
-```
-
 ### use
 
-Browse to http://localhost:3000
+Browse to http://localhost:8080
 
 ![upperz Demo](upperz.gif?raw=true "upperz")
